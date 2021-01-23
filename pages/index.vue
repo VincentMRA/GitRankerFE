@@ -21,6 +21,7 @@
           <div v-if="loading" class="pb-5"> 
             <Loader></Loader>
           </div>
+          <div v-else-if="mainError" class="text-h6 error--text text-center">{{mainError}}</div>
           <div v-else-if="repo && repo.contributors">
 
              <v-list-item v-for="(contrib, index) in repo.contributors" :key="index">
@@ -65,6 +66,7 @@ export default {
     loading:false,
     repo:null,
     urlErrors:null,
+    mainError:null,
   }),
   methods:{
     checkUrl(url){
@@ -81,6 +83,7 @@ export default {
       return true
     },
     getRepo(){
+      this.mainUrl=null
       this.loading=true
 
       if (!this.checkUrl(this.url)){
@@ -91,17 +94,17 @@ export default {
       let config = {
         method: 'post',
         url: `https://api-github11sigma.herokuapp.com/graphql?query=query{\n  repo(url:"${vm.url}") {\n   owner,repo_name,url,contributors {\n      id, url, avatarUrl,contributions, adds, dels, commits, total\n    }\n  }\n}`,
-        headers: { 
-          'Bearer': process.env.GITHUB_KEY
-        }
       };
       this.$axios(config)
       .then(res => {
         console.log(res.data.data.repo)
-        if (res.data.data.repo.repo_name==null){
-          vm.urlErrors="Cant find this repo please check your url"
-        }
         vm.repo=res.data.data.repo
+        if (!vm.repo.repo_name){
+          vm.mainError="There's no repo one this link. Check if the link is right"
+        }
+        else if (!vm.repo.contributors){
+          vm.mainError="There are no contributors to this repo. Please insert another URL"
+        }
         if (vm.repo && vm.repo.contributors){
           vm.repo.contributors.sort((a,b)=>{
             if (a.total > b.total) return -1;
