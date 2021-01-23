@@ -83,7 +83,7 @@ export default {
       return true
     },
     getRepo(){
-      this.mainUrl=null
+      this.mainError=null
       this.loading=true
 
       if (!this.checkUrl(this.url)){
