@@ -98,6 +98,9 @@ export default {
       this.$axios(config)
       .then(res => {
         console.log(res.data.data.repo)
+        if (res.data.data.repo.repo_name==null){
+          vm.urlErrors="Cant find this repo please check your url"
+        }
         vm.repo=res.data.data.repo
         if (vm.repo && vm.repo.contributors){
           vm.repo.contributors.sort((a,b)=>{
