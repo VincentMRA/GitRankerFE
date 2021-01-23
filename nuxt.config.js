@@ -6,16 +6,16 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - 11sigma',
-    title: '11sigma',
+    titleTemplate: 'Most awesome Github Repo Ranker - 11sigma',
+    title: '11sigma Test',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'This is the seo for the most awesome Github Repo ranker used as the 11sigma test' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/11sigma.ico' }],
+    
   },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
@@ -28,7 +28,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
+    // '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
@@ -42,7 +42,8 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
